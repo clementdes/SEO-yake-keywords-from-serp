@@ -37,8 +37,8 @@ text_input = st.text_area("Entrez le texte ici :")
 url_input = st.text_input("Ou entrez l'URL ici :")
 
 # Champs dans la sidebar
-textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password", value="abe15d2af673d8e637250ff5d573b24bb083bb6af18435b9555513b1")
-valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password", value="E18257C59ED24E9AA0E041348E8A989C")
+textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
+valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password")
 keyword_input = st.sidebar.text_input("Entrez un mot-clé pour la recherche ValueSERP")
 location_query = st.sidebar.text_input("Entrez une location pour la recherche ValueSERP")
 user_url = st.sidebar.text_input("Votre URL")
