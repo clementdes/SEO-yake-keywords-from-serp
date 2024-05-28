@@ -1,0 +1,6 @@
+streamlit
+yake
+nltk
+pandas
+textrazor
+requests
