@@ -40,7 +40,7 @@ url_input = st.text_input("Ou entrez l'URL ici :")
 textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
 valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password")
 keyword_input = st.sidebar.text_input("Entrez un mot-clé pour la recherche ValueSERP")
-location_query = st.sidebar.text_input("Entrez une location pour la recherche ValueSERP")
+location_query = st.sidebar.text_input("Entrez une localisation pour les SERP")
 user_url = st.sidebar.text_input("Votre URL")
 
 # Bouton pour rechercher les locations avec l'API ValueSERP
