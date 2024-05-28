@@ -1,57 +1,70 @@
-Extraction de mots-clés avec YAKE et TextRazor
-English version below
+# Extraction de mots-clés avec YAKE et TextRazor
 
-Bienvenue dans l'application Extraction de mots-clés avec YAKE et TextRazor ! Cette application vous permet d'extraire des mots-clés pertinents à partir de textes ou d'URLs en utilisant les bibliothèques YAKE et TextRazor, ainsi que de rechercher des mots-clés avec l'API ValueSERP.
+**English version below**
 
-Fonctionnalités
-Extraction de mots-clés à partir de textes fournis par l'utilisateur.
-Extraction de mots-clés à partir de contenus d'URLs.
-Recherche de mots-clés et de locations avec l'API ValueSERP.
-Analyse des résultats de recherche Google pour un mot-clé donné et une location sélectionnée.
-Comparaison des mots-clés extraits pour des URLs spécifiques.
-Téléchargement des résultats sous forme de fichiers CSV.
-Prérequis
-Python 3.7 ou supérieur
-Clé API TextRazor
-Clé API ValueSERP
-Fichier custom_stopwords.txt contenant des stopwords personnalisés
-Installation
-Clonez ce dépôt GitHub :
+Bienvenue dans l'application **Extraction de mots-clés avec YAKE et TextRazor** ! Cette application vous permet d'extraire des mots-clés pertinents à partir de textes ou d'URLs en utilisant les bibliothèques YAKE et TextRazor, ainsi que de rechercher des mots-clés avec l'API ValueSERP.
 
-git clone https://github.com/votre_nom/votre_repo.git
+## Fonctionnalités
+
+- Extraction de mots-clés à partir de textes fournis par l'utilisateur.
+- Extraction de mots-clés à partir de contenus d'URLs.
+- Recherche de mots-clés et de locations avec l'API ValueSERP.
+- Analyse des résultats de recherche Google pour un mot-clé donné et une location sélectionnée.
+- Comparaison des mots-clés extraits pour des URLs spécifiques.
+- Téléchargement des résultats sous forme de fichiers CSV.
+
+## Prérequis
+
+- Python 3.7 ou supérieur
+- Clé API TextRazor
+- Clé API ValueSERP
+- Fichier `custom_stopwords.txt` contenant des stopwords personnalisés
+
+## Installation
+
+1. Clonez ce dépôt GitHub :
+
+    ```bash
+    git clone https://github.com/votre_nom/votre_repo.git
     cd votre_repo
+    ```
 
+2. Installez les dépendances :
 
-Installez les dépendances :
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-pip install -r requirements.txt
+3. Assurez-vous d'avoir les stopwords de NLTK :
 
-
-Assurez-vous d'avoir les stopwords de NLTK :
-
-import nltk
+    ```python
+    import nltk
     nltk.download('stopwords')
+    ```
 
+## Utilisation
 
-Utilisation
-Lancez l'application Streamlit :
+1. Lancez l'application Streamlit :
 
-streamlit run app.py
+    ```bash
+    streamlit run app.py
+    ```
 
+2. Ouvrez votre navigateur et accédez à `http://localhost:8501`.
 
-Ouvrez votre navigateur et accédez à http://localhost:8501.
+3. Entrez votre texte ou URL dans les champs appropriés.
 
-Entrez votre texte ou URL dans les champs appropriés.
+4. Fournissez vos clés API TextRazor et ValueSERP dans la barre latérale.
 
-Fournissez vos clés API TextRazor et ValueSERP dans la barre latérale.
+5. Cliquez sur "Rechercher les locations" pour obtenir des suggestions de locations avec l'API ValueSERP.
 
-Cliquez sur "Rechercher les locations" pour obtenir des suggestions de locations avec l'API ValueSERP.
+6. Cliquez sur "Analyser" pour extraire les mots-clés et afficher les résultats.
 
-Cliquez sur "Analyser" pour extraire les mots-clés et afficher les résultats.
+## Exemple de code
 
-Exemple de code
 Voici un extrait du code principal de l'application :
 
+```python
 import streamlit as st
 import yake
 import nltk
@@ -98,74 +111,93 @@ location_query = st.sidebar.text_input("Entrez une location pour la recherche Va
 user_url = st.sidebar.text_input("Votre URL")
 
 # ... (le reste du code)
+```
 
+## Contribuer
 
-Contribuer
 Les contributions sont les bienvenues ! Veuillez soumettre des problèmes et des demandes de fonctionnalités via les issues GitHub. Pour contribuer au code, veuillez créer une pull request.
 
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+## Licence
 
-Remerciements
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## Remerciements
+
 Merci à toutes les bibliothèques et API utilisées dans ce projet :
 
-Streamlit
-YAKE
-TextRazor
-ValueSERP
-NLTK
-Keyword Extraction with YAKE and TextRazor
-Welcome to the Keyword Extraction with YAKE and TextRazor application! This application allows you to extract relevant keywords from texts or URLs using the YAKE and TextRazor libraries, as well as search for keywords using the ValueSERP API.
+- [Streamlit](https://streamlit.io/)
+- [YAKE](https://github.com/LIAAD/yake)
+- [TextRazor](https://www.textrazor.com/)
+- [ValueSERP](https://www.valueserp.com/)
+- [NLTK](https://www.nltk.org/)
 
-Features
-Keyword extraction from user-provided texts.
-Keyword extraction from URL contents.
-Keyword and location search using the ValueSERP API.
-Analysis of Google search results for a given keyword and selected location.
-Comparison of extracted keywords for specific URLs.
-Download results as CSV files.
-Prerequisites
-Python 3.7 or higher
-TextRazor API key
-ValueSERP API key
-custom_stopwords.txt file containing custom stopwords
-Installation
-Clone this GitHub repository:
+---
 
-git clone https://github.com/your_name/your_repo.git
+# Keyword Extraction with YAKE and TextRazor
+
+Welcome to the **Keyword Extraction with YAKE and TextRazor** application! This application allows you to extract relevant keywords from texts or URLs using the YAKE and TextRazor libraries, as well as search for keywords using the ValueSERP API.
+
+## Features
+
+- Keyword extraction from user-provided texts.
+- Keyword extraction from URL contents.
+- Keyword and location search using the ValueSERP API.
+- Analysis of Google search results for a given keyword and selected location.
+- Comparison of extracted keywords for specific URLs.
+- Download results as CSV files.
+
+## Prerequisites
+
+- Python 3.7 or higher
+- TextRazor API key
+- ValueSERP API key
+- `custom_stopwords.txt` file containing custom stopwords
+
+## Installation
+
+1. Clone this GitHub repository:
+
+    ```bash
+    git clone https://github.com/your_name/your_repo.git
     cd your_repo
+    ```
 
+2. Install the dependencies:
 
-Install the dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-pip install -r requirements.txt
+3. Ensure you have the NLTK stopwords:
 
-
-Ensure you have the NLTK stopwords:
-
-import nltk
+    ```python
+    import nltk
     nltk.download('stopwords')
+    ```
 
+## Usage
 
-Usage
-Run the Streamlit application:
+1. Run the Streamlit application:
 
-streamlit run app.py
+    ```bash
+    streamlit run app.py
+    ```
 
+2. Open your browser and go to `http://localhost:8501`.
 
-Open your browser and go to http://localhost:8501.
+3. Enter your text or URL in the appropriate fields.
 
-Enter your text or URL in the appropriate fields.
+4. Provide your TextRazor and ValueSERP API keys in the sidebar.
 
-Provide your TextRazor and ValueSERP API keys in the sidebar.
+5. Click "Search locations" to get location suggestions using the ValueSERP API.
 
-Click "Search locations" to get location suggestions using the ValueSERP API.
+6. Click "Analyze" to extract keywords and display the results.
 
-Click "Analyze" to extract keywords and display the results.
+## Code Example
 
-Code Example
 Here is an excerpt from the main application code:
 
+```python
 import streamlit as st
 import yake
 import nltk
@@ -212,19 +244,28 @@ location_query = st.sidebar.text_input("Enter a location for ValueSERP search")
 user_url = st.sidebar.text_input("Your URL")
 
 # ... (rest of the code)
+```
 
+## Contributing
 
-Contributing
 Contributions are welcome! Please submit issues and feature requests via GitHub issues. To contribute code, please create a pull request.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## License
 
-Acknowledgements
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
 Thanks to all the libraries and APIs used in this project:
 
-Streamlit
-YAKE
-TextRazor
-ValueSERP
-NLTK
+- [Streamlit](https://streamlit.io/)
+- [YAKE](https://github.com/LIAAD/yake)
+- [TextRazor](https://www.textrazor.com/)
+- [ValueSERP](https://www.valueserp.com/)
+- [NLTK](https://www.nltk.org/)
+
+---
+
+N'hésitez pas à adapter ce fichier README en fonction de vos besoins spécifiques et de votre dépôt GitHub.
+
+Feel free to adapt this README file according to your specific needs and your GitHub repository.
