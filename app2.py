@@ -68,8 +68,15 @@ if generate_keywords_button:
         keywords = extract_keywords_with_yake(text_input, stopword_list)
         if keywords:
             st.subheader("Mots-clés extraits")
+            # Créer un DataFrame pour les mots-clés
+            keyword_data = []
             for kw, score in keywords:
-                st.write(f"{kw} (score: {score})")
+                occurrence = text_input.lower().count(kw.lower())
+                keyword_data.append([kw, occurrence, score])
+            df_keywords = pd.DataFrame(keyword_data, columns=["Mot clé extrait", "Nombre d'occurrences", "Score"])
+
+            # Afficher le tableau des mots-clés extraits
+            st.dataframe(df_keywords)
         else:
             st.warning("Aucun mot-clé trouvé. Veuillez entrer un texte valide.")
     else:
