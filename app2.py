@@ -47,6 +47,9 @@ st.title("Extraction de mots-clés avec YAKE et TextRazor")
 # Champ de texte pour l'entrée utilisateur
 text_input = st.text_area("Entrez le texte ici :")
 
+# Bouton pour extraire les mots-clés
+generate_keywords_button = st.button("Extraire les mots-clés")
+
 # Champ de saisie pour l'URL
 url_input = st.text_input("Ou entrez l'URL ici :")
 
@@ -117,6 +120,16 @@ def extract_keywords_with_yake(text, stopword_list, max_ngram_size=3, deduplicat
         stopwords=stopword_list
     )
     return kw_extractor.extract_keywords(text)
+
+# Extraction des mots-clés à partir du texte fourni si le bouton est cliqué
+if generate_keywords_button and text_input:
+    keywords = extract_keywords_with_yake(text_input, stopword_list)
+    if keywords:
+        st.subheader("Mots-clés extraits")
+        for kw, score in keywords:
+            st.write(f"{kw} (score: {score})")
+    else:
+        st.warning("Aucun mot-clé trouvé. Veuillez entrer un texte valide.")
 
 # Initialiser les variables
 df = None
