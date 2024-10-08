@@ -111,7 +111,7 @@ def analyze_url_with_textrazor(url, api_key):
 # Extraction des mots-clés à partir de l'URL fournie si le bouton est cliqué
 if generate_keywords_url_button:
     if url_input:
-        api_key = textrazor_api_key
+        if not api_key:
         if not api_key:
             st.error("Veuillez entrer votre clé API TextRazor.")
         else:
@@ -138,6 +138,9 @@ if generate_keywords_url_button:
 
 # Champs dans la sidebar
 textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
+
+# Assigner la clé API avant son utilisation dans le bloc d'analyse d'URL
+api_key = textrazor_api_key
 valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password")
 keyword_input = st.sidebar.text_input("Entrez un mot-clé pour la recherche ValueSERP")
 location_query = st.sidebar.text_input("Entrez une localisation pour les SERP")
