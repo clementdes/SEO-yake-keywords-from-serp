@@ -108,9 +108,9 @@ def analyze_url_with_textrazor(url, api_key):
         st.error(f"Erreur lors de l'analyse de l'URL avec TextRazor : {e}")
         return None
 
-# Extraction des mots-clés à partir de l'URL fournie si le bouton est cliqué
-if generate_keywords_url_button:
+if generate_keywords_url_button:
     if url_input:
+        textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
         api_key = textrazor_api_key
         if not api_key:
             st.error("Veuillez entrer votre clé API TextRazor.")
@@ -136,8 +136,7 @@ if generate_keywords_url_button:
     else:
         st.warning("Veuillez entrer une URL pour extraire les mots-clés.")
 
-# Champs dans la sidebar
-textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
+textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
 
 # Assigner la clé API avant son utilisation dans le bloc d'analyse d'URL
 api_key = textrazor_api_key
