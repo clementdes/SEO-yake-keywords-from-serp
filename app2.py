@@ -85,6 +85,57 @@ if generate_keywords_button:
 # Champ de saisie pour l'URL
 url_input = st.text_input("Ou entrez l'URL ici :")
 
+# Bouton pour extraire les mots-clés de l'URL
+generate_keywords_url_button = st.button("Extraire les mots-clés de l'URL")
+
+# Fonction pour analyser une URL avec TextRazor
+def analyze_url_with_textrazor(url, api_key):
+    if not api_key:
+        st.error("Clé API TextRazor manquante.")
+        return None
+    textrazor.api_key = api_key
+    client = textrazor.TextRazor(extractors=["entities", "topics"])
+    client.set_cleanup_mode("cleanHTML")
+    client.set_cleanup_return_cleaned(True)
+    try:
+        response = client.analyze_url(url)
+        if response.ok:
+            return response.cleaned_text
+        else:
+            st.error(f"Erreur lors de l'analyse de l'URL avec TextRazor : {response.error}")
+            return None
+    except textrazor.TextRazorAnalysisException as e:
+        st.error(f"Erreur lors de l'analyse de l'URL avec TextRazor : {e}")
+        return None
+
+# Extraction des mots-clés à partir de l'URL fournie si le bouton est cliqué
+if generate_keywords_url_button:
+    if url_input:
+        api_key = textrazor_api_key
+        if not api_key:
+            st.error("Veuillez entrer votre clé API TextRazor.")
+        else:
+            analyzed_text = analyze_url_with_textrazor(url_input, api_key)
+            if analyzed_text:
+                keywords = extract_keywords_with_yake(analyzed_text, stopword_list)
+                if keywords:
+                    st.subheader("Mots-clés extraits de l'URL")
+                    # Créer un DataFrame pour les mots-clés
+                    keyword_data = []
+                    for kw, score in keywords:
+                        occurrence = analyzed_text.lower().count(kw.lower())
+                        keyword_data.append([kw, occurrence, score])
+                    df_keywords = pd.DataFrame(keyword_data, columns=["Mot clé extrait", "Nombre d'occurrences", "Score"])
+
+                    # Afficher le tableau des mots-clés extraits
+                    st.dataframe(df_keywords)
+                else:
+                    st.warning("Aucun mot-clé trouvé. Veuillez entrer une URL valide.")
+            else:
+                st.warning("Impossible d'analyser le contenu de l'URL.")
+    else:
+        st.warning("Veuillez entrer une URL pour extraire les mots-clés.")
+
 # Champs dans la sidebar
 textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
 valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password")
@@ -115,26 +166,6 @@ if st.sidebar.button("Rechercher les locations"):
 # Afficher la location sélectionnée
 if 'selected_location' in st.session_state:
     st.sidebar.write(f"Location sélectionnée : {st.session_state['selected_location']}")
-
-# Fonction pour analyser une URL avec TextRazor
-def analyze_url_with_textrazor(url, api_key):
-    if not api_key:
-        st.error("Clé API TextRazor manquante.")
-        return None
-    textrazor.api_key = api_key
-    client = textrazor.TextRazor(extractors=["entities", "topics"])
-    client.set_cleanup_mode("cleanHTML")
-    client.set_cleanup_return_cleaned(True)
-    try:
-        response = client.analyze_url(url)
-        if response.ok:
-            return response.cleaned_text
-        else:
-            st.error(f"Erreur lors de l'analyse de l'URL avec TextRazor : {response.error}")
-            return None
-    except textrazor.TextRazorAnalysisException as e:
-        st.error(f"Erreur lors de l'analyse de l'URL avec TextRazor : {e}")
-        return None
 
 # Fonction pour convertir le DataFrame en CSV
 @st.cache_data
