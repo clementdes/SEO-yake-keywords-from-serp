@@ -136,7 +136,7 @@ if generate_keywords_url_button:
     else:
         st.warning("Veuillez entrer une URL pour extraire les mots-clés.")
 
-textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
+textrazor_api_key = st.sidebar.text_input("Entrez votre clé API TextRazor", type="password")
 
 # Assigner la clé API avant son utilisation dans le bloc d'analyse d'URL
 api_key = textrazor_api_key
