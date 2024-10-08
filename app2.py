@@ -4,7 +4,6 @@ import nltk
 from nltk.corpus import stopwords
 import pandas as pd
 import os
-import textrazor
 import requests
 
 # Initialisation de Streamlit
@@ -42,7 +41,7 @@ except LookupError:
     st.warning("Impossible de charger les stopwords NLTK. Utilisation des stopwords personnalisés uniquement.")
 
 # Titre de l'application
-st.title("Extraction de mots-clés avec YAKE et TextRazor")
+st.title("Extraction de mots-clés avec YAKE")
 
 # Champ de texte pour l'entrée utilisateur
 text_input = st.text_area("Entrez le texte ici :")
@@ -115,8 +114,6 @@ if generate_keywords_url_button:
         st.warning("Veuillez entrer une URL pour extraire les mots-clés.")
 
 
-# Assigner la clé API avant son utilisation dans le bloc d'analyse d'URL
-api_key = textrazor_api_key
 valueserp_api_key = st.sidebar.text_input("Entrez votre clé API ValueSERP", type="password")
 keyword_input = st.sidebar.text_input("Entrez un mot-clé pour la recherche ValueSERP")
 location_query = st.sidebar.text_input("Entrez une localisation pour les SERP")
@@ -181,7 +178,7 @@ if keyword_input and 'selected_location' in st.session_state:
             keyword_data = {}
             for rank, result in enumerate(organic_results[:10]):  # Limiter à 10 URLs
                 url = result['link']
-                text = analyze_url_with_textrazor(url, textrazor_api_key)
+                text = requests.get(url).text
                 if text:
                     combined_text += text + " "
                     keywords = extract_keywords_with_yake(text, stopword_list)
