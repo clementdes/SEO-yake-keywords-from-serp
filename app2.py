@@ -50,6 +50,31 @@ text_input = st.text_area("Entrez le texte ici :")
 # Bouton pour extraire les mots-clés
 generate_keywords_button = st.button("Extraire les mots-clés")
 
+# Fonction pour extraire les mots-clés avec YAKE
+def extract_keywords_with_yake(text, stopword_list, max_ngram_size=3, deduplication_threshold=0.9, num_of_keywords=100):
+    kw_extractor = yake.KeywordExtractor(
+        lan="fr",
+        n=max_ngram_size,
+        dedupLim=deduplication_threshold,
+        top=num_of_keywords,
+        features=None,
+        stopwords=stopword_list
+    )
+    return kw_extractor.extract_keywords(text)
+
+# Extraction des mots-clés à partir du texte fourni si le bouton est cliqué
+if generate_keywords_button:
+    if text_input:
+        keywords = extract_keywords_with_yake(text_input, stopword_list)
+        if keywords:
+            st.subheader("Mots-clés extraits")
+            for kw, score in keywords:
+                st.write(f"{kw} (score: {score})")
+        else:
+            st.warning("Aucun mot-clé trouvé. Veuillez entrer un texte valide.")
+    else:
+        st.warning("Veuillez entrer du texte pour extraire les mots-clés.")
+
 # Champ de saisie pour l'URL
 url_input = st.text_input("Ou entrez l'URL ici :")
 
@@ -108,28 +133,6 @@ def analyze_url_with_textrazor(url, api_key):
 @st.cache_data
 def convert_df_to_csv(df):
     return df.to_csv(index=False, encoding='utf-8-sig').encode('utf-8-sig')
-
-# Fonction pour extraire les mots-clés avec YAKE
-def extract_keywords_with_yake(text, stopword_list, max_ngram_size=3, deduplication_threshold=0.9, num_of_keywords=100):
-    kw_extractor = yake.KeywordExtractor(
-        lan="fr",
-        n=max_ngram_size,
-        dedupLim=deduplication_threshold,
-        top=num_of_keywords,
-        features=None,
-        stopwords=stopword_list
-    )
-    return kw_extractor.extract_keywords(text)
-
-# Extraction des mots-clés à partir du texte fourni si le bouton est cliqué
-if generate_keywords_button and text_input:
-    keywords = extract_keywords_with_yake(text_input, stopword_list)
-    if keywords:
-        st.subheader("Mots-clés extraits")
-        for kw, score in keywords:
-            st.write(f"{kw} (score: {score})")
-    else:
-        st.warning("Aucun mot-clé trouvé. Veuillez entrer un texte valide.")
 
 # Initialiser les variables
 df = None
