@@ -111,7 +111,7 @@ def analyze_url_with_textrazor(url, api_key):
 # Extraction des mots-clés à partir de l'URL fournie si le bouton est cliqué
 if generate_keywords_url_button:
     if url_input:
-        if not api_key:
+        api_key = textrazor_api_key
         if not api_key:
             st.error("Veuillez entrer votre clé API TextRazor.")
         else:
